@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605391882868",
+    "project_id": "habitpro01",
+    "storage_bucket": "habitpro01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605391882868:android:3cdf8a71937493ffaf1f21",
+        "android_client_info": {
+          "package_name": "com.example.habit_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD097Polgd9_JUxoAFRDTFB9-s2fhiP1rI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

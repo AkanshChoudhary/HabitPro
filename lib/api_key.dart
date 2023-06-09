@@ -1,1 +1,1 @@
-final String openAiKey = "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";
+final String openAiKey = "OPEN_AI_KEY";

@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Map<String, dynamic>? idMap = value.data();
       setState(() {
         widget.gender = idMap!['Gender'];
-        widget.name = idMap!['Name'];
+        widget.name = idMap['Name'];
       });
       FirebaseFirestore.instance
           .collection('user+${appwrite.currentUser.$id}')
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
         setState(() {
           widget.allIncompleteHabits = incompleteMap!['Habits'];
           if (idMap!['Allcustomhabits'] != null) {
-            widget.allCustomHabits = idMap!['Allcustomhabits'];
+            widget.allCustomHabits = idMap['Allcustomhabits'];
           }
         });
       });
@@ -66,13 +66,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<List<String>> generateHabitData(
       String habitName, String desc, String gender) async {
     return api.generateHabitData(habitName, desc, gender).then((response) {
-      if (response != null) {
+      if (response != null && response.statusCode==200) {
         final jsonRes = jsonDecode(response.body);
         final choiceRes = jsonRes['choices'][0];
         final messageRes = choiceRes['message']['content'];
         List<String> list = messageRes.split("\n");
         return list;
-      } else {
+      } if(response!=null && response.statusCode ==408){
+        return ["Timeout exception"];
+      }else {
         return [];
       }
     });
@@ -171,6 +173,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           actions: false, context: context);
                       generateHabitData(habitName, habitDesc, widget.gender)
                           .then((value) {
+                            if(value.length == 1){
+                              Navigator.pop(context);
+                              showAlert(
+                                  title: "Timeout Error",
+                                  text:
+                                  "Too much time taken for habit generation",
+                                  actions: true, context: context);
+                            }
                             List<String> finalList = [];
                             for(String i in value){
                               if(i.startsWith("Day")){
@@ -265,15 +275,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Center(
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: (widget.name != null)
-                                    ? Text(
+                                child: Text(
                                         'Hey there ${widget.name}!',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(fontSize: 20),
                                       )
-                                    : CircularProgressIndicator(
-                                        backgroundColor: Colors.black,
-                                      ),
                               ),
                             ),
                           ),

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:habit_pro/api_key.dart';
-
 import 'package:habit_pro/data/data.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,13 +25,16 @@ Future<http.Response?> generateHabitData(String habitName,String habitDesc,Strin
                 "Exercising. \n Rules: \n 1. Give me 21 discrete points for each day "
                 "\n2. All day tasks should not be more than 2 sentences. (Keep it short and clear) "
                 "\n3. You can add rest days or break days in between"
-                "\n4. All the day tasks should be having incremental change and improvement and should connected to the previous day tasks."
+                "\n4. All task strings should start with the word \"Day n\" where \"n\" is the number of day task being printed. Example( \"Day 1:\",\"Day 2:\" and so on)"
+                "\n5. All the day tasks should be having incremental change and improvement and should connected to the previous day tasks."
                 " (example: Day 3 and Day 4 tasks should not be totally different from each other, Day 4 tasks should add on improvement to work done in Day 3)"
                 "\n5. make it fun for the user"
           }
         ]
       }),
-    ).timeout(const Duration(seconds: 25));
+    ).timeout(const Duration(seconds: 60),onTimeout: (){
+      return http.Response("",408);
+    });
   }
   catch (e){
     return null;

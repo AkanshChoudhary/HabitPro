@@ -6,6 +6,10 @@ At the core of Habit Pro's mission is the belief that everyone deserves a better
 
 With a user-friendly interface and customizable habit options, our app is designed to cater to the unique needs and preferences of each individual, ensuring a personalized experience that leads to real, lasting change.
 
+# Demo Video
+
+https://youtu.be/46M_qd-N8jo
+
 # Importance of habit formation
 
 Why we came up with this particular app idea? Habits greatly impact your life, with over 40% of daily actions being unconscious habits rather than conscious decisions. They grow stronger over time and are crucial due to the neurological cravings they create, as certain behaviors release "pleasure" chemicals in the brain, reinforcing the habit. Cultivating the right habits is essential.
@@ -46,7 +50,5 @@ Using the power of the OpenAI Chat Completion API, our algorithm takes into acco
 1. Better Statistical Representation of Habit Progression
 2. Social Engagement
 
-# Demo Video
 
-https://youtu.be/46M_qd-N8jo
 
